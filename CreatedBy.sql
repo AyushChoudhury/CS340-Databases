@@ -66,8 +66,7 @@ DELIMITER ;
 -- Indexes for table `CreatedBy`
 --
 ALTER TABLE `CreatedBy`
-  ADD PRIMARY KEY (`PositionID`,`CompanyID`),
-  ADD KEY `created_by_delete` (`CompanyID`);
+  ADD PRIMARY KEY (`PositionID`,`CompanyID`);
 
 --
 -- Constraints for dumped tables
@@ -78,9 +77,7 @@ ALTER TABLE `CreatedBy`
 --
 ALTER TABLE `CreatedBy`
   ADD CONSTRAINT `CreatedBy_ibfk_1` FOREIGN KEY (`PositionID`) REFERENCES `Positions` (`PositionID`),
-  ADD CONSTRAINT `CreatedBy_ibfk_2` FOREIGN KEY (`CompanyID`) REFERENCES `Companies` (`CompanyID`),
-  ADD CONSTRAINT `created_by_delete` FOREIGN KEY (`CompanyID`) REFERENCES `Companies` (`CompanyID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `position_created_by_delete` FOREIGN KEY (`PositionID`) REFERENCES `Positions` (`PositionID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `CreatedBy_ibfk_2` FOREIGN KEY (`CompanyID`) REFERENCES `Companies` (`CompanyID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

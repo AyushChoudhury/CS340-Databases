@@ -55,9 +55,7 @@ INSERT INTO `Feedback` (`FeedbackID`, `Rating`, `Comment`, `ApplicantID`, `Compa
 -- Indexes for table `Feedback`
 --
 ALTER TABLE `Feedback`
-  ADD PRIMARY KEY (`FeedbackID`),
-  ADD KEY `feedback_company_delete` (`CompanyID`),
-  ADD KEY `feedback_applicant_delete` (`ApplicantID`);
+  ADD PRIMARY KEY (`FeedbackID`);
 
 --
 -- Constraints for dumped tables
@@ -68,9 +66,7 @@ ALTER TABLE `Feedback`
 --
 ALTER TABLE `Feedback`
   ADD CONSTRAINT `Feedback_ibfk_1` FOREIGN KEY (`ApplicantID`) REFERENCES `Applicants` (`ApplicantID`),
-  ADD CONSTRAINT `Feedback_ibfk_2` FOREIGN KEY (`CompanyID`) REFERENCES `Companies` (`CompanyID`),
-  ADD CONSTRAINT `feedback_applicant_delete` FOREIGN KEY (`ApplicantID`) REFERENCES `Applicants` (`ApplicantID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `feedback_company_delete` FOREIGN KEY (`CompanyID`) REFERENCES `Companies` (`CompanyID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `Feedback_ibfk_2` FOREIGN KEY (`CompanyID`) REFERENCES `Companies` (`CompanyID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

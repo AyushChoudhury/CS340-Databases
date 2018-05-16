@@ -68,9 +68,7 @@ DELIMITER ;
 -- Indexes for table `Applications`
 --
 ALTER TABLE `Applications`
-  ADD PRIMARY KEY (`ApplicationID`),
-  ADD KEY `application_delete` (`ApplicantID`),
-  ADD KEY `position_application_delete` (`PositionID`) USING BTREE;
+  ADD PRIMARY KEY (`ApplicationID`);
 
 --
 -- Constraints for dumped tables
@@ -81,9 +79,7 @@ ALTER TABLE `Applications`
 --
 ALTER TABLE `Applications`
   ADD CONSTRAINT `Applications_ibfk_1` FOREIGN KEY (`ApplicantID`) REFERENCES `Applicants` (`ApplicantID`),
-  ADD CONSTRAINT `Applications_ibfk_2` FOREIGN KEY (`PositionID`) REFERENCES `Positions` (`PositionID`),
-  ADD CONSTRAINT `application_delete` FOREIGN KEY (`ApplicantID`) REFERENCES `Applicants` (`ApplicantID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `position_appli_delete` FOREIGN KEY (`PositionID`) REFERENCES `Positions` (`PositionID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `Applications_ibfk_2` FOREIGN KEY (`PositionID`) REFERENCES `Positions` (`PositionID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -54,8 +54,7 @@ INSERT INTO `Reference` (`ApplicationID`, `Name`, `Email`, `PhoneNumber`) VALUES
 -- Indexes for table `Reference`
 --
 ALTER TABLE `Reference`
-  ADD PRIMARY KEY (`Name`),
-  ADD KEY `reference_delete` (`ApplicationID`);
+  ADD PRIMARY KEY (`Name`);
 
 --
 -- Constraints for dumped tables
@@ -65,8 +64,7 @@ ALTER TABLE `Reference`
 -- Constraints for table `Reference`
 --
 ALTER TABLE `Reference`
-  ADD CONSTRAINT `Reference_ibfk_1` FOREIGN KEY (`ApplicationID`) REFERENCES `Applications` (`ApplicationID`),
-  ADD CONSTRAINT `reference_delete` FOREIGN KEY (`ApplicationID`) REFERENCES `Applications` (`ApplicationID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `Reference_ibfk_1` FOREIGN KEY (`ApplicationID`) REFERENCES `Applications` (`ApplicationID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

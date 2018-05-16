@@ -55,8 +55,7 @@ INSERT INTO `Locations` (`CompanyID`, `Street`, `City`, `State`, `ZIP`) VALUES
 -- Indexes for table `Locations`
 --
 ALTER TABLE `Locations`
-  ADD PRIMARY KEY (`Street`),
-  ADD KEY `location_delete` (`CompanyID`);
+  ADD PRIMARY KEY (`Street`);
 
 --
 -- Constraints for dumped tables
@@ -66,8 +65,7 @@ ALTER TABLE `Locations`
 -- Constraints for table `Locations`
 --
 ALTER TABLE `Locations`
-  ADD CONSTRAINT `Locations_ibfk_1` FOREIGN KEY (`CompanyID`) REFERENCES `Companies` (`CompanyID`),
-  ADD CONSTRAINT `location_delete` FOREIGN KEY (`CompanyID`) REFERENCES `Companies` (`CompanyID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `Locations_ibfk_1` FOREIGN KEY (`CompanyID`) REFERENCES `Companies` (`CompanyID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
