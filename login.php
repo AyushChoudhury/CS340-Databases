@@ -1,4 +1,4 @@
-<!-- SIGNUP PAGE -->
+<!-- LOGIN PAGE -->
 
 <!DOCTYPE HTML>
 
@@ -16,7 +16,7 @@ else {
 
   <html>
   <head>
-    <title>Sign Up - FindMeAJob</title>
+    <title>Log In - FindMeAJob</title>
     <link type="text/css" rel="stylesheet" href="./css/Semantic-UI-CSS-master/semantic.css"/>
     <link type="text/css" rel="stylesheet" href="./css/stylesheet.css"/>
     <script type="text/javascript" src="./css/Semantic-UI-CSS-master/semantic.js"></script>
@@ -28,16 +28,10 @@ else {
     });
 
     function validateEmployeeForm() {
-      var nameField = document.forms['employeeForm']['name'];
       var emailField = document.forms['employeeForm']['email'];
       var passwordField = document.forms['employeeForm']['password'];
-      var birthdateField = document.forms['employeeForm']['birthdate'];
-      var skillsField = document.forms['employeeForm']['skills'];
-      if (nameField == null || nameField == "" ||
-          emailField == null || emailField == "" ||
-          passwordField == null || passwordField == "" ||
-          birthdateField == null || birthdateField == "" ||
-          skillsField == null || skillsField == "") {
+      if (emailField == null || emailField == "" ||
+          passwordField == null || passwordField == "") {
         alert("Please fill all required fields before submitting!");
         return false;
       }
@@ -45,14 +39,10 @@ else {
     }
 
     function validateCompanyForm() {
-      var nameField = document.forms['companyForm']['name'];
       var emailField = document.forms['companyForm']['email'];
       var passwordField = document.forms['companyForm']['password'];
-      var descriptionField = document.forms['companyForm']['description'];
-      if (nameField == null || nameField == "" ||
-          emailField == null || emailField == "" ||
-          passwordField == null || passwordField == "" ||
-          descriptionField == null || descriptionField == "") {
+      if (emailField == null || emailField == "" ||
+          passwordField == null || passwordField == "") {
         alert("Please fill all required fields before submitting!");
         return false;
       }
@@ -64,7 +54,7 @@ else {
     <div class="siteheader" id="siteheader"></div>
 
     <div class="mainbody">
-      <left class="sectionheader"><h1>Sign Up</h1></left>
+      <left class="sectionheader"><h1>Log In</h1></left>
       <div class="ui divider"></div><br>
 
       <p class="requirednote">* Denotes a required field</p><br>
@@ -72,13 +62,9 @@ else {
       <table style="width:100%">
         <tr>
           <td style="width:50%">
-            <!-- Employee Signup Form -->
+            <!-- Employee Login Form -->
             <h2>Prospective Employees</h2>
-            <form name="employeeForm" onsubmit="return validateEmployeeForm()" action="./server/employee_signup.php" method="post" id="employeeForm">
-              <div class="elem">
-                <span class="requirednote">*</span>
-                Name: <input class="inputbox" type="text" name="name"><br><br>
-              </div>
+            <form name="employeeForm" onsubmit="return validateEmployeeForm()" action="./server/employee_login.php" method="post" id="employeeForm">
               <div class="elem">
                 <span class="requirednote">*</span>
                 Email: <input class="inputbox" type="email" name="email"><br><br>
@@ -87,25 +73,13 @@ else {
                 <span class="requirednote">*</span>
                 Password: <input class="inputbox" type="password" name="password"><br><br>
               </div>
-              <div class="elem">
-                <span class="requirednote">*</span>
-                Birth Date: <input class="inputbox" type="date" name="birthdate"><br><br>
-              </div>
-              <div class="elem">
-                <span class="requirednote">*</span>
-                Skills (separate each skill by a comma):<br><br> <input class="inputbox" type="text" name="skills"><br><br>
-              </div>
-              <input class="ui blue button" type="submit" value="Sign Up!">
+              <input class="ui blue button" type="submit" value="Log In">
             </form>
           </td>
           <td style="width:50%">
-            <!-- Company Signup Form -->
+            <!-- Company Login Form -->
             <h2>Companies</h2>
-            <form name="companyForm" onsubmit="return validateCompanyForm()" action="./server/company_signup.php" method="post" id="companyForm">
-              <div class="elem">
-                <span class="requirednote">*</span>
-                Company Name: <input class="inputbox" type="text" name="name"><br><br>
-              </div>
+            <form name="companyForm" onsubmit="return validateCompanyForm()" action="./server/company_login.php" method="post" id="companyForm">
               <div class="elem">
                 <span class="requirednote">*</span>
                 Email: <input class="inputbox" type="email" name="email"><br><br>
@@ -114,11 +88,7 @@ else {
                 <span class="requirednote">*</span>
                 Password: <input class="inputbox" type="password" name="password"><br><br>
               </div>
-              <div class="elem">
-                <span class="requirednote">*</span>
-                Company Description:<br><br> <input class="inputbox" type="text" name="description"><br><br>
-              </div>
-              <input class="ui blue button" type="submit" value="Sign Up!">
+              <input class="ui blue button" type="submit" value="Log In">
             </form>
           </td>
         </tr>

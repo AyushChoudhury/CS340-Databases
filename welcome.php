@@ -3,13 +3,21 @@
 <!DOCTYPE HTML>
 
 <?php
-require "checklogin.php";
+//require "checklogin.php";
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 
-if (isset($_SESSION['id']) && $_SESSION['id'] != null) {
-  $url = "./index.php";
-  echo "<script type='text/javascript'>document.location.href = '$url';</script>";
+if (isset($_SESSION['id']) && $_SESSION['id'] != null && isset($_SESSION['type'])) {
+  alert("Welcome, <?php echo $_SESSION['name']; ?>!");
+  if ($_SESSION['type'] == 'Employee') {
+    $url = "./employee_dash.php";
+    echo "<script type='text/javascript'>document.location.href = '$url';</script>";
+  }
+  else if ($_SESSION['type'] == 'Company') {
+    $url = "./company_dash.php";
+    echo "<script type='text/javascript'>document.location.href = '$url';</script>";
+  }
 }
 else {
   ?>
