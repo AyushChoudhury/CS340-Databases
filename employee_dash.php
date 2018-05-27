@@ -3,6 +3,7 @@
 <!DOCTYPE HTML>
 
 <?php
+/*
 session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
@@ -12,6 +13,7 @@ if (!isset($_SESSION['id']) || $_SESSION['id'] == null || !isset($_SESSION['type
   echo "<script type='text/javascript'>document.location.href = '$url';</script>";
 }
 else {
+*/
   ?>
 
   <html>
