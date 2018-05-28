@@ -34,7 +34,6 @@ else {
       var descriptionField = document.forms['companyForm']['description'];
       if (nameField == null || nameField == "" ||
       emailField == null || emailField == "" ||
-      passwordField == null || passwordField == "" ||
       descriptionField == null || descriptionField == "") {
         alert("Please fill all required fields before submitting!");
         return false;

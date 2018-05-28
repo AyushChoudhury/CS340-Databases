@@ -31,12 +31,10 @@ else {
     function validateEmployeeForm() {
       var nameField = document.forms['employeeForm']['name'];
       var emailField = document.forms['employeeForm']['email'];
-      var passwordField = document.forms['employeeForm']['password'];
       var birthdateField = document.forms['employeeForm']['birthdate'];
       var skillsField = document.forms['employeeForm']['skills'];
       if (nameField == null || nameField == "" ||
           emailField == null || emailField == "" ||
-          passwordField == null || passwordField == "" ||
           birthdateField == null || birthdateField == "" ||
           skillsField == null || skillsField == "") {
         alert("Please fill all required fields before submitting!");
