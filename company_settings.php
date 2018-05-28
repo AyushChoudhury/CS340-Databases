@@ -31,7 +31,6 @@ else {
     function validateCompanyForm() {
       var nameField = document.forms['companyForm']['name'];
       var emailField = document.forms['companyForm']['email'];
-      var passwordField = document.forms['companyForm']['password'];
       var descriptionField = document.forms['companyForm']['description'];
       if (nameField == null || nameField == "" ||
       emailField == null || emailField == "" ||
@@ -56,19 +55,15 @@ else {
         </div>
         <div class="elem">
           <span class="requirednote">*</span>
-          Company Name: <input class="inputbox" type="text" name="name"><br><br>
+          Company Name: <input class="inputbox" type="text" name="name" value="<?php echo $_SESSION['name']; ?>"><br><br>
         </div>
         <div class="elem">
           <span class="requirednote">*</span>
-          Email: <input class="inputbox" type="email" name="email"><br><br>
+          Email: <input class="inputbox" type="email" name="email" value="<?php echo $_SESSION['email']; ?>"><br><br>
         </div>
         <div class="elem">
           <span class="requirednote">*</span>
-          Password: <input class="inputbox" type="password" name="password"><br><br>
-        </div>
-        <div class="elem">
-          <span class="requirednote">*</span>
-          Company Description: <input class="inputbox" type="text" name="description"><br><br>
+          Company Description: <input class="inputbox" type="text" name="description" value="<?php echo $_SESSION['description']; ?>"><br><br>
         </div>
         <input class="ui blue button" type="submit" value="Save Changes">
 

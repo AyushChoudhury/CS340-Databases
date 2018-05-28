@@ -25,7 +25,7 @@ else {
   }
 
   $positions = array();
-  $stmt = $mysqli->prepare("SELECT * FROM Positions WHERE CompanyID=? ORDER BY StartDate ASC LIMIT 5");
+  $stmt = $mysqli->prepare("SELECT * FROM Positions WHERE CompanyID=? ORDER BY StartDate ASC");
   $stmt->bind_param('i', $_SESSION['id']);
   $stmt->execute();
   $res = $stmt->get_result();
@@ -38,7 +38,7 @@ else {
 
   <html>
   <head>
-    <title>Dashboard - FindMeAJob</title>
+    <title>View All Positions - FindMeAJob</title>
     <link type="text/css" rel="stylesheet" href="./css/Semantic-UI-CSS-master/semantic.css"/>
     <link type="text/css" rel="stylesheet" href="./css/stylesheet.css"/>
     <script type="text/javascript" src="./css/Semantic-UI-CSS-master/semantic.js"></script>
@@ -54,17 +54,17 @@ else {
     <div class="siteheader" id="siteheader"></div>
 
     <div class="mainbody">
-      <left class="sectionheader"><h1>Dashboard</h1></left>
+      <left class="sectionheader"><h1>View All Positions</h1></left>
       <div class="ui divider"></div><br>
 
       <div style="display: inline-block">
-        <h2>Recently Created Positions</h2>
         <table class="ui padded celled table" style="max-width: 100%; max-height: 50vw; display: block; overflow-y:auto">
           <thead>
             <tr>
               <th>Job Title / Employee Type</th>
               <th>Start Date</th>
               <th>Location</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -73,6 +73,7 @@ else {
                 <td><?php echo $pos['EmployeeType']; ?></td>
                 <td><?php echo date('M d, Y', strtotime($pos['StartDate'])); ?></td>
                 <td><?php echo $pos['Location']; ?></td>
+                <td><a href="./view_applicants.php?id=<?php echo $pos['PositionID']; ?>" class="ui blue button"></a></td>
               </tr>
             <?php endforeach; ?>
           </tbody>
