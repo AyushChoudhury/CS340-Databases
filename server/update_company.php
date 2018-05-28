@@ -1,5 +1,3 @@
-<!DOCTYPE HTML>
-
 <?php
 require "./server/connectvars.php";
 session_start();
@@ -29,3 +27,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 $stmt = $mysqli->prepare("UPDATE Companies SET name=?, email=?, password=?, description=? WHERE CompanyID=?");
+$stmt->bind_param('isssii', $name, $email, $password, $description);
+$stmt->execute();
+  
+  if ($stmt->error == "") {
+    $message = "Application submitted!";
+    $url = "../employee_dash.php";
+  }
+  else {
+    echo $stmt->error;
+    sleep(5);
+    $message = "Error submitting application: " . $stmt->error;
+    $url = "../explore.php";
+  }
+  echo "<script type='text/javascript'>alert('$message');</script>";
+  $mysqli->close();
+  echo "<script type='text/javascript'>document.location.href = '$url';</script>";
+}
+$mysqli->close();
+?>
