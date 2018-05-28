@@ -47,8 +47,6 @@ else {
       $("#siteheader").load("employeeheader.html");
     });
 
-    </script>
-    <script>
     function validateFeedbackForm() {
       var chooseCoField = document.forms['feedbackForm']['chooseco'];
       var ratingField = document.forms['feedbackForm']['rating'];
@@ -79,7 +77,9 @@ else {
       <p class="requirednote">* Denotes a required field</p><br>
 
       <form name="feedbackForm" onsubmit="return validateFeedbackForm()" action="./server/submit_feedback.php" method="post" id="feedbackForm">
-        <input class="inputbox" type="text" name="applicantID" value="<?php echo $_SESSION['id']; ?>" style="display: none" readonly>
+        <div class="elem" style="display: none">
+           <input class="inputbox" type="number" name="applicantID" value="<?php echo $_SESSION['id']; ?>" readonly>
+        </div>
         <div class="elem">
           <span class="requirednote">*</span>
           <select class="ui search dropdown" name="chooseco" id="chooseco">

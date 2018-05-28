@@ -62,7 +62,9 @@ else {
 
       <h2>Create A New Position</h2>
       <form name="positionForm" onsubmit="return validatePositionApplicationForm()" action="./server/submit_position.php" method="post" id="positionForm">
-        <input class="inputbox" type="text" name="companyID" value="<?php echo $_SESSION['id']; ?>" style="display: none" readonly>
+        <div class="elem" style="display: none">
+          <input class="inputbox" type="text" name="companyID" value="<?php echo $_SESSION['id']; ?>" readonly>
+        </div>
         <div class="elem">
           <span class="requirednote">*</span>
           Industry: <input class="inputbox" type="text" name="industry"><br><br>

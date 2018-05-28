@@ -3,16 +3,17 @@
 <!DOCTYPE HTML>
 
 <?php
+
 require "./server/connectvars.php";
 session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
-
-if (!isset($_SESSION['id']) || $_SESSION['type'] != 'Employee') {
+if (!isset($_SESSION['id']) || $_SESSION['type'] != 'Company') {
   $url = "./index.php";
   echo "<script type='text/javascript'>document.location.href = '$url';</script>";
 }
 else {
+
   ?>
 
   <html>
@@ -25,20 +26,17 @@ else {
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script>
     $(document).ready(function() {
-      $("#siteheader").load("employeeheader.html");
+      $("#siteheader").load("companyheader.html");
     });
-
-    function validateEmployeeForm() {
-      var nameField = document.forms['employeeForm']['name'];
-      var emailField = document.forms['employeeForm']['email'];
-      var passwordField = document.forms['employeeForm']['password'];
-      var birthdateField = document.forms['employeeForm']['birthdate'];
-      var skillsField = document.forms['employeeForm']['skills'];
+    function validateCompanyForm() {
+      var nameField = document.forms['companyForm']['name'];
+      var emailField = document.forms['companyForm']['email'];
+      var passwordField = document.forms['companyForm']['password'];
+      var descriptionField = document.forms['companyForm']['description'];
       if (nameField == null || nameField == "" ||
-          emailField == null || emailField == "" ||
-          passwordField == null || passwordField == "" ||
-          birthdateField == null || birthdateField == "" ||
-          skillsField == null || skillsField == "") {
+      emailField == null || emailField == "" ||
+      passwordField == null || passwordField == "" ||
+      descriptionField == null || descriptionField == "") {
         alert("Please fill all required fields before submitting!");
         return false;
       }
@@ -52,34 +50,32 @@ else {
     <div class="mainbody">
       <left class="sectionheader"><h1>Settings</h1></left>
       <div class="ui divider"></div><br>
-
-      <form name="employeeForm" onsubmit="return validateEmployeeForm()" action="./server/update_employee.php" method="post" id="employeeForm">
+      <form name="companyForm" onsubmit="return validateCompanyForm()" action="./server/update_company.php" method="post" id="companyForm">
         <div class="elem" style="display: none">
-           <input class="inputbox" type="number" name="applicantID" value="<?php echo $_SESSION['id']; ?>" readonly>
+           <input class="inputbox" type="number" name="companyID" value="<?php echo $_SESSION['id']; ?>" readonly>
         </div>
         <div class="elem">
           <span class="requirednote">*</span>
-          Name: <input class="inputbox" type="text" name="name" value="<?php echo $_SESSION['name']; ?>"><br><br>
+          Company Name: <input class="inputbox" type="text" name="name"><br><br>
         </div>
         <div class="elem">
           <span class="requirednote">*</span>
-          Email: <input class="inputbox" type="email" name="email" value="<?php echo $_SESSION['email']; ?>"><br><br>
+          Email: <input class="inputbox" type="email" name="email"><br><br>
         </div>
         <div class="elem">
           <span class="requirednote">*</span>
-          Birth Date: <input class="inputbox" type="date" name="birthdate" value=<?php echo $_SESSION['birthdate']; ?>><br><br>
+          Password: <input class="inputbox" type="password" name="password"><br><br>
         </div>
         <div class="elem">
           <span class="requirednote">*</span>
-          Skills (separate each skill by a comma):<br><br> <input class="inputbox" type="text" name="skills" value="<?php echo $_SESSION['skills']; ?>"><br><br>
+          Company Description: <input class="inputbox" type="text" name="description"><br><br>
         </div>
         <input class="ui blue button" type="submit" value="Save Changes">
-      </form>
 
-    </div>
-  </body>
-  </html>
+      </div>
+    </body>
+    </html>
 
-  <?php
-}
-?>
+    <?php
+  }
+  ?>

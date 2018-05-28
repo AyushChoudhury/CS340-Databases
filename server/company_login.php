@@ -34,14 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // user's stored password that we must compare with
     $pHash = $row['Pass'];
     $iterations = 1000;
-    echo $pHash . "<br>";
+    //echo $pHash . "<br>";
 
     // need to get the salt from the hash
     $storedpHash = explode("|", $pHash);// salt of stored password
-    echo $storedpHash[0] . "<br>";
-    echo $password . "<br>";
+    //echo $storedpHash[0] . "<br>";
+    //echo $password . "<br>";
     $hash = hash_pbkdf2("sha256",$password, $storedpHash[0], $iterations, 50, false);
-    echo $hash . "<br>" . $storedpHash[1];
+    //echo $hash . "<br>" . $storedpHash[1];
 
     if (!strcmp($hash,$storedpHash[1])) {
       // logic after checking hash password

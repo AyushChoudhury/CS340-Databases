@@ -33,9 +33,9 @@ else {
       });
       </script>
       <script>
-      function validatePositionApplicationForm() {
-        var resumeField = document.forms['CVForm']['resume'];
-        var coverLetterField = document.forms['CVForm']['coverletter'];;
+      function validateApplicationForm() {
+        var resumeField = document.forms['positionForm']['resume'];
+        var coverLetterField = document.forms['positionForm']['coverletter'];;
         if (resumeField == null || resumeField == "" ||
         coverLetterField == null || coverLetterField == "") {
           alert("Please fill all required fields before submitting!");
@@ -55,9 +55,13 @@ else {
         <p class="requirednote">* Denotes a required field</p><br>
 
         <h2>Apply for <?php echo $title; ?> at <?php echo $company; ?>!</h2>
-        <form name="positionForm" onsubmit="return validatePositionApplicationForm()" action="./server/submit_application.php" method="post" id="CVForm">
-          <input class="inputbox" type="text" name="applicantID" value="<?php echo $_SESSION['id']; ?>" style="display: none" readonly>
-          <input class="inputbox" type="text" name="positionID" value="<?php echo $positionID; ?>" style="display: none" readonly>
+        <form name="positionForm" onsubmit="return validateApplicationForm()" action="./server/submit_application.php" method="post" id="positionForm">
+          <div class="elem" style="display: none">
+            <input class="inputbox" type="text" name="applicantID" value="<?php echo $_SESSION['id']; ?>" readonly>
+          </div>
+          <div class="elem" style="display: none">
+            <input class="inputbox" type="text" name="positionID" value="<?php echo $positionID; ?>" readonly>
+          </div>
           <div class="elem">
             <span class="requirednote">*</span>
             Resume/CV: <textarea name="resume" rows="5" cols="40" wrap="hard"></textarea>
