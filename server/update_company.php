@@ -19,3 +19,13 @@ $mysqli = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
     header("Location: ../index.php");
     exit;
   }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $name = $_POST["Name"];
+  $email = $_POST["Email"];
+  $password = $_POST["Pass"];
+  $description = $_POST["description"];
+
+
+
+$stmt = $mysqli->prepare("UPDATE Companies SET name=?, email=?, password=?, description=? WHERE CompanyID=?");
