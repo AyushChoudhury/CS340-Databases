@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $name = $_POST["Name"];
   $email = $_POST["Email"];
   $password = $_POST["Pass"];
-  $description = $_POST["description"];
+  $description = $_POST["Description"];
 
 
 
