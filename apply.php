@@ -31,17 +31,18 @@ else {
       $(document).ready(function() {
         $("#siteheader").load("employeeheader.html");
       });
-      </script>
-      <script>
+
       function validateApplicationForm() {
-        var resumeField = document.forms['positionForm']['resume'];
-        var coverLetterField = document.forms['positionForm']['coverletter'];;
+        var resumeField = document.forms['positionForm']['resumeCV'].value;
+        var coverLetterField = document.forms['positionForm']['coverLetter'].value;
         if (resumeField == null || resumeField == "" ||
         coverLetterField == null || coverLetterField == "") {
           alert("Please fill all required fields before submitting!");
           return false;
         }
-        else return true;
+        else {
+          return true;
+        }
       }
       </script>
     </head>
@@ -49,12 +50,11 @@ else {
       <div class="siteheader" id="siteheader"></div>
 
       <div class="mainbody">
-        <left class="sectionheader"><h1>Apply for Position!</h1></left>
+        <left class="sectionheader"><h1>Apply for <?php echo $title; ?> at <?php echo $company; ?>!</h1></left>
         <div class="ui divider"></div><br>
 
         <p class="requirednote">* Denotes a required field</p><br>
 
-        <h2>Apply for <?php echo $title; ?> at <?php echo $company; ?>!</h2>
         <form name="positionForm" onsubmit="return validateApplicationForm()" action="./server/submit_application.php" method="post" id="positionForm">
           <div class="elem" style="display: none">
             <input class="inputbox" type="text" name="applicantID" value="<?php echo $_SESSION['id']; ?>" readonly>
@@ -64,13 +64,13 @@ else {
           </div>
           <div class="elem">
             <span class="requirednote">*</span>
-            Resume/CV: <textarea name="resume" rows="5" cols="40" wrap="hard"></textarea>
+            Resume/CV: <textarea class="inputbox" name="resumeCV" rows="5" cols="40"></textarea>
           </div>
           <div class="elem">
             <span class="requirednote">*</span>
-            Cover Letter: <textarea name="coverletter" rows="5" cols="40" wrap="hard"></textarea>
+            Cover Letter: <textarea class="inputbox" name="coverLetter" rows="5" cols="40"></textarea>
           </div>
-          <input class="ui blue button" type="submit" value="Sign Up!">
+          <input class="ui blue button" type="submit" value="Apply">
         </form>
 
       </div>

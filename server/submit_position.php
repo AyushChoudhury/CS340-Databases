@@ -19,7 +19,7 @@ $startDate = $industry = $employeeType = $location = $salary = $skillsWanted = $
 $message = $url = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $startDate = $_POST['startdate'];
+  $startDate = $_POST['startDate'];
   $industry = $_POST['industry'];
   $employeeType = $_POST['employeeType'];
   $location = $_POST['location'];
@@ -28,8 +28,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $description = $_POST['description'];
   $companyID = $_POST['companyID'];
 
-  $stmt = $mysqli->prepare("INSERT INTO Positions (StartDate, Industry, EmployeeType, Location, Salary, SkillsWanted, Description, CompanyID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-  $stmt->bind_param('ssssissi', $startDate, $industry, $employeeType, $location, $salary, $skillsWanted, $description, $companyID);
+  $positionID = 0;
+  $stmt = $mysqli->prepare("SELECT MAX(PositionID) AS maxID FROM Positions");
+  $stmt->execute();
+  $res = $stmt->get_result();
+  if ($res->num_rows > 0) {
+    $row = $res->fetch_assoc();
+    $positionID = $row['maxID'] + 1;
+  }
+
+  $stmt = $mysqli->prepare("INSERT INTO Positions (PositionID, StartDate, Industry, EmployeeType, Location, Salary, SkillsWanted, Description, CompanyID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+  $stmt->bind_param('issssissi', $positionID, $startDate, $industry, $employeeType, $location, $salary, $skillsWanted, $description, $companyID);
   $stmt->execute();
   if ($stmt->error == "") {
     $message = "Position created!";

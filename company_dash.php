@@ -25,7 +25,7 @@ else {
   }
 
   $positions = array();
-  $stmt = $mysqli->prepare("SELECT * FROM Positions WHERE CompanyID=?");
+  $stmt = $mysqli->prepare("SELECT * FROM Positions WHERE CompanyID=? ORDER BY StartDate DESC LIMIT 5");
   $stmt->bind_param('i', $_SESSION['id']);
   $stmt->execute();
   $res = $stmt->get_result();

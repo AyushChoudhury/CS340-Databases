@@ -70,7 +70,7 @@ else {
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($application as $app): ?>
+            <?php foreach ($applications as $app): ?>
               <tr>
                 <td><?php echo $app['EmployeeType']; ?></td>
                 <td><?php echo $app['CompanyName']; ?></td>

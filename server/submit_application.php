@@ -19,6 +19,7 @@ $applicantID = $positionID = $resumeCV = $coverLetter = "";
 $message = $url = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
   $applicantID = $_POST['applicantID'];
   $positionID = $_POST['positionID'];
   $resumeCV = $_POST['resumeCV'];
@@ -31,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $applicationID = 0;
   if ($res->num_rows > 0) {
     $row = $res->fetch_assoc();
-    $applicationID = $row;
+    $applicationID = $row['maxID'] + 1;
   }
 
   $stmt = $mysqli->prepare("INSERT INTO Applications (ApplicationID, dateCreated, ResumeCV, CoverLetter, ApplicantID, PositionID) VALUES (?, ?, ?, ?, ?, ?)");
@@ -42,6 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $url = "../employee_dash.php";
   }
   else {
+    echo $stmt->error;
+    sleep(5);
     $message = "Error submitting application: " . $stmt->error;
     $url = "../explore.php";
   }

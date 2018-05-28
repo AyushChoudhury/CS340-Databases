@@ -95,7 +95,7 @@ else {
         </div>
         <div class="elem">
           <span class="requirednote">*</span>
-          Comment: <input class="inputbox" type="text" name="comment"></textarea>
+          Comment: <textarea class="inputbox" rows="2" cols="50" name="comment"></textarea>
         </div>
         <input class="ui blue button" type="submit" value="Submit Feedback">
       </form>

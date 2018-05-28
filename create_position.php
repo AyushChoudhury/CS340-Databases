@@ -79,7 +79,7 @@ else {
         </div>
         <div class="elem">
           <span class="requirednote">*</span>
-          Location: <input class="inputbox" type="date" name="location"><br><br>
+          Location: <input class="inputbox" type="text" name="location"><br><br>
         </div>
         <div class="elem">
           <span class="requirednote">*</span>
