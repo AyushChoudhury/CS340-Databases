@@ -18,6 +18,8 @@ $mysqli = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
     exit;
   }
 
+$name = $email = $password = $description = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $name = $_POST["Name"];
   $email = $_POST["Email"];
