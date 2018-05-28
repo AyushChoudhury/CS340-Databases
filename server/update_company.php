@@ -32,7 +32,7 @@ $stmt->execute();
   
   if ($stmt->error == "") {
     $message = "Application submitted!";
-    $url = "../employee_dash.php";
+    $url = "../company_settings.php";
   }
   else {
     echo $stmt->error;
