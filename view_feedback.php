@@ -1,5 +1,3 @@
-<!-- EXPLORE PAGE -->
-
 <!DOCTYPE HTML>
 
 <?php
@@ -8,7 +6,7 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 
-if (!isset($_SESSION['id']) || $_SESSION['type'] != 'Employee') {
+if (!isset($_SESSION['id']) || $_SESSION['type'] != 'Company') {
   $url = "./index.php";
   echo "<script type='text/javascript'>document.location.href = '$url';</script>";
 }
@@ -24,21 +22,20 @@ else {
     exit;
   }
 
-  $positions = array();
-  $stmt = $mysqli->prepare("SELECT P.*, C.Name AS CompanyName, C.Email AS Contact FROM Positions P, Companies C WHERE P.CompanyID=C.CompanyID AND P.PositionID NOT IN (SELECT PositionID FROM Applications WHERE ApplicantID=?) ORDER BY P.StartDate ASC");
+  $feedback = array();
+  $stmt = $mysqli->prepare("SELECT * FROM Feedback WHERE CompanyID=?");
   $stmt->bind_param('i', $_SESSION['id']);
   $stmt->execute();
   $res = $stmt->get_result();
-  if ($res->num_rows > 0) {
-    while ($row = $res->fetch_assoc()) {
-      $positions[] = $row;
-    }
+  while ($row = $res->fetch_assoc()) {
+    $feedback[] = $row;
   }
+
   ?>
 
   <html>
   <head>
-    <title>Explore - FindMeAJob</title>
+    <title>View Feedback - FindMeAJob</title>
     <link type="text/css" rel="stylesheet" href="./css/Semantic-UI-CSS-master/semantic.css"/>
     <link type="text/css" rel="stylesheet" href="./css/stylesheet.css"/>
     <script type="text/javascript" src="./css/Semantic-UI-CSS-master/semantic.js"></script>
@@ -46,7 +43,7 @@ else {
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script>
     $(document).ready(function() {
-      $("#siteheader").load("employeeheader.html");
+      $("#siteheader").load("companyheader.html");
     });
     </script>
   </head>
@@ -54,31 +51,22 @@ else {
     <div class="siteheader" id="siteheader"></div>
 
     <div class="mainbody">
-      <left class="sectionheader"><h1>Explore</h1></left>
+      <left class="sectionheader"><h1>View Feedback</h1></left>
       <div class="ui divider"></div><br>
 
       <div style="display: inline-block">
-        <h2>Available Positions</h2>
         <table class="ui padded celled table" style="max-width: 100%; max-height: 50vw; display: block; overflow-y:auto">
           <thead>
             <tr>
-              <th>Job Title</th>
-              <th>Company</th>
-              <th>Start Date</th>
-              <th>Location</th>
-              <th>Contact</th>
-              <th>Action</th>
+              <th>Rating</th>
+              <th>Comment</th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($positions as $pos): ?>
+            <?php foreach ($feedback as $feed): ?>
               <tr>
-                <td><?php echo $pos['EmployeeType']; ?></td>
-                <td><?php echo $pos['CompanyName']; ?></td>
-                <td><?php echo date('M d, Y', strtotime($pos['StartDate'])); ?></td>
-                <td><?php echo $pos['Location']; ?></td>
-                <td><?php echo $pos['Contact']; ?></td>
-                <td><a href="./apply.php?id=<?php echo $pos['PositionID']; ?>&title=<?php echo $pos['EmployeeType']; ?>&company=<?php echo $pos['CompanyName']; ?>" class="ui green button">Apply</a></td>
+                <td><?php echo $feed['Rating']; ?></td>
+                <td><?php echo $feed['Comment']; ?></td>
               </tr>
             <?php endforeach; ?>
           </tbody>

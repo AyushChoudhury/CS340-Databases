@@ -3,6 +3,7 @@
 <?php
 
 require "./connectvars.php";
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 
@@ -23,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $email = $_POST['email'];
   $password = $_POST['password'];
 
-  $stmt = $mysqli->prepare("SELECT CompanyID, Name, Pass FROM Companies WHERE email=?");
+  $stmt = $mysqli->prepare("SELECT * FROM Companies WHERE email=?");
   $stmt->bind_param('s', $email);
   $stmt->execute();
   $res = $stmt->get_result();
@@ -49,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['type'] = 'Company';
       $_SESSION['name'] = $row['Name'];
       $_SESSION['email'] = $email;
+      $_SESSION['description'] = $row['Description'];
       echo "<script type='text/javascript'>alert('Welcome!');</script>";
       $url = "../company_dash.php";
     }

@@ -3,6 +3,7 @@
 <?php
 
 require "./connectvars.php";
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 
@@ -37,7 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   else {
     $iterations = 1000;
 
-    $salt = openssl_random_pseudo_bytes(16);
+    $salt = "";
+		$alphanumchars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+		for ($i = 0; $i < 16; $i++) {
+			$salt .= $alphanumchars[mt_rand(0, strlen($alphanumchars)-1)];
+		}
 
     $hash = hash_pbkdf2("sha256",$password, $salt, $iterations, 50, false);
 
@@ -54,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $stmt = $mysqli->prepare("INSERT INTO Companies (CompanyID, Name, Email, Pass, Description) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param('isssss', $id, $name, $email, $hashandSalt, $description);
+    $stmt->bind_param('issss', $id, $name, $email, $hashandSalt, $description);
     $stmt->execute();
     if ($stmt->error == "") {
       session_start();
@@ -62,8 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['type'] = 'Company';
       $_SESSION['name'] = $name;
       $_SESSION['email'] = $email;
+      $_SESSION['description'] = $description;
       echo "<script type='text/javascript'>alert('Welcome!');</script>";
-      $url = "../employee_dash.php";
+      $url = "../company_dash.php";
     }
     else {
       echo $stmt->error;

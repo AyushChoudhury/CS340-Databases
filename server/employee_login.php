@@ -3,6 +3,7 @@
 <?php
 
 require "./connectvars.php";
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 
@@ -23,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $email = $_POST['email'];
   $password = $_POST['password'];
 
-  $stmt = $mysqli->prepare("SELECT ApplicantID, Name, Pass FROM Applicants WHERE email=?");
+  $stmt = $mysqli->prepare("SELECT * FROM Applicants WHERE email=?");
   $stmt->bind_param('s', $email);
   $stmt->execute();
   $res = $stmt->get_result();
@@ -33,22 +34,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // user's stored password that we must compare with
     $pHash = $row['Pass'];
     $iterations = 1000;
-    echo $pHash . "<br>";
+    //echo $pHash . "<br>";
 
     // need to get the salt from the hash
     $storedpHash = explode("|", $pHash);// salt of stored password
-    echo $storedpHash[0] . "<br>";
-    echo $password . "<br>";
+    //echo $storedpHash[0] . "<br>";
+    //echo $password . "<br>";
     $hash = hash_pbkdf2("sha256",$password, $storedpHash[0], $iterations, 50, false);
-    echo $hash . "<br>" . $storedpHash[1];
+    //echo $hash . "<br>" . $storedpHash[1];
 
     if (!strcmp($hash,$storedpHash[1])) {
       // logic after checking hash password
-      session_start();
       $_SESSION['id'] = $row['ApplicantID'];
       $_SESSION['type'] = 'Employee';
       $_SESSION['name'] = $row['Name'];
       $_SESSION['email'] = $email;
+      $_SESSION['birthdate'] = $row['Birthdate'];
+      $_SESSION['skills'] = $row['Skills'];
+      $message = 'session type: ' . $_SESSION['type'];
+      //echo "<script type='text/javascript'>alert('$message');</script>";
       echo "<script type='text/javascript'>alert('Welcome!');</script>";
       $url = "../employee_dash.php";
     }

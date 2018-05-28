@@ -8,14 +8,12 @@ ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 $url = "";
 
-if (isset($_SESSION['id']) && $_SESSION['id'] != null) {
-  if ((isset($_SESSION['employee']) && $_SESSION['employee'] != null)
-   && (!isset($_SESSION['company']) || $_SESSION['company'] == null)) {
+if (isset($_SESSION['id']) && isset($_SESSION['type'])) {
+  if ($_SESSION['type'] == 'Employee') {
      /* Employee Signed In */
      $url = "./employee_dash.php";
   }
-  else if ((isset($_SESSION['company']) && $_SESSION['company'] != null)
-   && (!isset($_SESSION['employee']) || $_SESSION['employee'] == null)) {
+  else if ($_SESSION['type'] == 'Company') {
      /* Company Signed In */
      $url = "./company_dash.php";
   }

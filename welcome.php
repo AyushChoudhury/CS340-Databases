@@ -8,8 +8,8 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 
-if (isset($_SESSION['id']) && $_SESSION['id'] != null && isset($_SESSION['type'])) {
-  alert("Welcome, <?php echo $_SESSION['name']; ?>!");
+if (isset($_SESSION['id']) && isset($_SESSION['type'])) {
+    echo "<script type='text/javascript'>alert('Welcome back!');</script>";
   if ($_SESSION['type'] == 'Employee') {
     $url = "./employee_dash.php";
     echo "<script type='text/javascript'>document.location.href = '$url';</script>";
@@ -62,7 +62,8 @@ else {
           </a>
         </div>
       </center>
-    <div>
+    </div>
+  </body>
   </html>
 
   <?php

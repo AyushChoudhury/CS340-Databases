@@ -3,6 +3,7 @@
 <?php
 
 require "./connectvars.php";
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 
@@ -66,6 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['type'] = 'Employee';
       $_SESSION['name'] = $name;
       $_SESSION['email'] = $email;
+      $_SESSION['birthdate'] = $birthdate;
+      $_SESSION['skills'] = $skills;
       echo "<script type='text/javascript'>alert('Welcome!');</script>";
       $url = "../employee_dash.php";
     }
