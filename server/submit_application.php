@@ -15,7 +15,7 @@ if ($mysqli->connect_error) {
   exit;
 }
 
-$applicantID = $positionID = $resumeCV = $coverLetter = "";
+$applicantID = $positionID = $resumeCV = $coverLetter = $refName = $refEmail = $refPhone = "";
 $message = $url = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -25,6 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $resumeCV = $_POST['resumeCV'];
   $coverLetter = $_POST['coverLetter'];
   $dateCreated = date('Y-m-d H:i:s');
+  $refName = $_POST['refname'];
+  $refEmail = $_POST['refemail'];
+  $refPhone - $_POST['refphone'];
 
   $stmt = $mysqli->prepare("SELECT MAX(ApplicationID) AS maxID FROM Applications");
   $stmt->execute();
@@ -39,12 +42,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $stmt->bind_param('isssii', $applicationID, $dateCreated, $resumeCV, $coverLetter, $applicantID, $positionID);
   $stmt->execute();
   if ($stmt->error == "") {
-    $message = "Application submitted!";
-    $url = "../employee_dash.php";
+    $stmt = $mysqli->prepare("INSERT INTO Reference (ApplicationID, Name, Email, PhoneNumber) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param('isss', $applicationID, $refName, $refEmail, $refPhone);
+    $stmt->execute();
+    if ($stmt->error == "") {
+      $message = "Application submitted!";
+      $url = "../employee_dash.php";
+    }
+    else {
+      $message = "Error saving reference: " . $stmt->error;
+      $url = "../explore.php";
+    }
   }
   else {
-    echo $stmt->error;
-    sleep(5);
     $message = "Error submitting application: " . $stmt->error;
     $url = "../explore.php";
   }

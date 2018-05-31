@@ -35,8 +35,14 @@ else {
       function validateApplicationForm() {
         var resumeField = document.forms['positionForm']['resumeCV'].value;
         var coverLetterField = document.forms['positionForm']['coverLetter'].value;
+        var refNameField = document.forms['positionForm']['refname'].value;
+        var refEmailField = document.forms['positionForm']['refemail'].value;
+        var refPhoneField = document.forms['positionForm']['refphone'].value;
         if (resumeField == null || resumeField == "" ||
-        coverLetterField == null || coverLetterField == "") {
+        coverLetterField == null || coverLetterField == "" ||
+        refNameField == null || refNameField == "" ||
+        refEmailField == null || refEmailField == "" ||
+        refPhoneField == null || refPhoneField == "") {
           alert("Please fill all required fields before submitting!");
           return false;
         }
@@ -69,6 +75,20 @@ else {
           <div class="elem">
             <span class="requirednote">*</span>
             Cover Letter: <textarea class="inputbox" name="coverLetter" rows="5" cols="40"></textarea>
+          </div><br>
+          <div class="ui divider"></div><br>
+          <h3>Add a Reference!</h3>
+          <div class="elem">
+            <span class="requirednote">*</span>
+            Reference Name: <input class="inputbox" type="number" name="refname"><br><br>
+          </div>
+          <div class="elem">
+            <span class="requirednote">*</span>
+            Reference Email: <input class="inputbox" type="number" name="refemail"><br><br>
+          </div>
+          <div class="elem">
+            <span class="requirednote">*</span>
+            Reference Phone Number: <input class="inputbox" type="number" name="refphone"><br><br>
           </div>
           <input class="ui blue button" type="submit" value="Apply">
         </form>

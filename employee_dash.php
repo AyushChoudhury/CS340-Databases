@@ -7,6 +7,8 @@ require "./server/connectvars.php";
 session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
+print_r($_SESSION);
+
 
 if (!isset($_SESSION['id']) || $_SESSION['type'] != 'Employee') {
   $url = "./index.php";
