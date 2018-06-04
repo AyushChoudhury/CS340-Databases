@@ -3,13 +3,16 @@
 <!DOCTYPE HTML>
 
 <?php
+echo session_start();
 require "./server/connectvars.php";
-session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
+$message = 'session type: ' . $_SESSION['type'];
+
+echo "<script type='text/javascript'>alert('$message');</script>";
+echo "<br>" . session_id();
+
 print_r($_SESSION);
-
-
 if (!isset($_SESSION['id']) || $_SESSION['type'] != 'Employee') {
   $url = "./index.php";
   echo "<script type='text/javascript'>document.location.href = '$url';</script>";

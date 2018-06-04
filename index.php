@@ -3,9 +3,12 @@
 <!DOCTYPE HTML>
 
 <?php
-session_start();
+echo session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
+print_r($_SESSION);
+echo "<br>" . session_id();
+
 $url = "";
 
 if (isset($_SESSION['id']) && isset($_SESSION['type'])) {

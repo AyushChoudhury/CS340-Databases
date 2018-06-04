@@ -1,9 +1,8 @@
 <!-- EMPLOYEE LOGIN SCRIPT -->
 
 <?php
-
-require "./connectvars.php";
 session_start();
+require "./connectvars.php";
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 
@@ -54,6 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $message = 'session type: ' . $_SESSION['type'];
       //echo "<script type='text/javascript'>alert('$message');</script>";
       echo "<script type='text/javascript'>alert('Welcome!');</script>";
+      echo "<script type='text/javascript'>alert('$message');</script>";
+      $message = session_id();
+      echo "<script type='text/javascript'>alert('$message');</script>";
       $url = "../employee_dash.php";
     }
     else {

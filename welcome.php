@@ -4,9 +4,11 @@
 
 <?php
 //require "checklogin.php";
-session_start();
+echo session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
+print_r($_SESSION);
+echo "<br>" . session_id();
 
 if (isset($_SESSION['id']) && isset($_SESSION['type'])) {
     echo "<script type='text/javascript'>alert('Welcome back!');</script>";
