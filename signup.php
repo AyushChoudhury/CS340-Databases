@@ -1,9 +1,5 @@
-<!-- SIGNUP PAGE -->
-
-<!DOCTYPE HTML>
-
 <?php
-require "checklogin.php";
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 
@@ -13,6 +9,8 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != null) {
 }
 else {
   ?>
+
+  <!DOCTYPE HTML>
 
   <html>
   <head>

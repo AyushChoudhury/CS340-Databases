@@ -1,14 +1,7 @@
-<!-- WELCOME PAGE -->
-
-<!DOCTYPE HTML>
-
 <?php
-//require "checklogin.php";
-echo session_start();
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
-print_r($_SESSION);
-echo "<br>" . session_id();
 
 if (isset($_SESSION['id']) && isset($_SESSION['type'])) {
     echo "<script type='text/javascript'>alert('Welcome back!');</script>";
@@ -23,6 +16,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['type'])) {
 }
 else {
   ?>
+
+  <!DOCTYPE HTML>
 
   <html>
   <head>

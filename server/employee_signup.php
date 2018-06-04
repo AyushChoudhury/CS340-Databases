@@ -1,9 +1,6 @@
-<!-- EMPLOYEE SIGNUP SCRIPT -->
-
 <?php
-
-require "./connectvars.php";
 session_start();
+require "./connectvars.php";
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 
@@ -62,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param('isssss', $id, $name, $email, $hashandSalt, $birthdate, $skills);
     $stmt->execute();
     if ($stmt->error == "") {
-      session_start();
       $_SESSION['id'] = $id;
       $_SESSION['type'] = 'Employee';
       $_SESSION['name'] = $name;

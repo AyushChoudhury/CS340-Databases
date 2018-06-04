@@ -1,11 +1,6 @@
-<!-- EXPLORE PAGE -->
-
-<!DOCTYPE HTML>
-
 <?php
-
-require "./server/connectvars.php";
 session_start();
+require "./server/connectvars.php";
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 if (!isset($_SESSION['id']) || $_SESSION['type'] != 'Company') {
@@ -15,6 +10,8 @@ if (!isset($_SESSION['id']) || $_SESSION['type'] != 'Company') {
 else {
 
   ?>
+
+  <!DOCTYPE HTML>
 
   <html>
   <head>

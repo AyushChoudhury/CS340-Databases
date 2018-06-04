@@ -1,5 +1,3 @@
-<!-- EMPLOYEE LOGIN SCRIPT -->
-
 <?php
 session_start();
 require "./connectvars.php";
@@ -37,10 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // need to get the salt from the hash
     $storedpHash = explode("|", $pHash);// salt of stored password
-    //echo $storedpHash[0] . "<br>";
-    //echo $password . "<br>";
     $hash = hash_pbkdf2("sha256",$password, $storedpHash[0], $iterations, 50, false);
-    //echo $hash . "<br>" . $storedpHash[1];
 
     if (!strcmp($hash,$storedpHash[1])) {
       // logic after checking hash password
@@ -50,12 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['email'] = $email;
       $_SESSION['birthdate'] = $row['Birthdate'];
       $_SESSION['skills'] = $row['Skills'];
-      $message = 'session type: ' . $_SESSION['type'];
-      //echo "<script type='text/javascript'>alert('$message');</script>";
-      echo "<script type='text/javascript'>alert('Welcome!');</script>";
-      echo "<script type='text/javascript'>alert('$message');</script>";
-      $message = session_id();
-      echo "<script type='text/javascript'>alert('$message');</script>";
+      echo "<script type='text/javascript'>alert('Welcome back!');</script>";
       $url = "../employee_dash.php";
     }
     else {
