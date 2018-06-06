@@ -82,7 +82,7 @@ else {
           </div>
           <div class="elem">
             <span class="requirednote">*</span>
-            Reference Email: <input class="inputbox" type="number" name="refemail"><br><br>
+            Reference Email: <input class="inputbox" type="text" name="refemail"><br><br>
           </div>
           <div class="elem">
             <span class="requirednote">*</span>
