@@ -78,7 +78,7 @@ else {
           <h3>Add a Reference!</h3>
           <div class="elem">
             <span class="requirednote">*</span>
-            Reference Name: <input class="inputbox" type="number" name="refname"><br><br>
+            Reference Name: <input class="inputbox" type="text" name="refname"><br><br>
           </div>
           <div class="elem">
             <span class="requirednote">*</span>
