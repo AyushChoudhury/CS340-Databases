@@ -86,7 +86,7 @@ else {
           </div>
           <div class="elem">
             <span class="requirednote">*</span>
-            Reference Phone Number: <input class="inputbox" type="number" name="refphone"><br><br>
+            Reference Phone Number: <input class="inputbox" type="text" name="refphone"><br><br>
           </div>
           <input class="ui blue button" type="submit" value="Apply">
         </form>

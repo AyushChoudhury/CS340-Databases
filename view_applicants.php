@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "./connectvars.php";
+require "./server/connectvars.php";
 ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 
@@ -9,28 +9,30 @@ if (!isset($_SESSION['id']) || $_SESSION['type'] != 'Company') {
 	echo "<script type='text/javascript'>document.location.href = '$url';</script>";
 }
 else {
+	$positionID = $_GET['id'];
+	?>
 
-	if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-		$positionID = $_GET['id'];
-		?>
+	<!DOCTYPE HTML>
 
-		<!DOCTYPE HTML>
+	<html>
+	<head>
+		<title>View All Applications for Position - FindMeAJob</title>
+		<link type="text/css" rel="stylesheet" href="./css/Semantic-UI-CSS-master/semantic.css"/>
+		<link type="text/css" rel="stylesheet" href="./css/stylesheet.css"/>
+		<script type="text/javascript" src="./css/Semantic-UI-CSS-master/semantic.js"></script>
+		<script type="text/javascript" src="./css/Semantic-UI-CSS-master/components/dropdown.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+		<script>
+		$(document).ready(function() {
+			$("#siteheader").load("companyheader.html");
+		});
+		</script>
+	</head>
+	<body>
 
-		<html>
-		<head>
-			<title>View All Applications for Position - FindMeAJob</title>
-			<link type="text/css" rel="stylesheet" href="./css/Semantic-UI-CSS-master/semantic.css"/>
-			<link type="text/css" rel="stylesheet" href="./css/stylesheet.css"/>
-			<script type="text/javascript" src="./css/Semantic-UI-CSS-master/semantic.js"></script>
-			<script type="text/javascript" src="./css/Semantic-UI-CSS-master/components/dropdown.js"></script>
-			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-			<script>
-			$(document).ready(function() {
-				$("#siteheader").load("companyheader.html");
-			});
-			</script>
+		<div class="siteheader" id="siteheader"></div>
 
-			<div class="siteheader" id="siteheader"></div>
+		<div class="mainbody">
 
 			<?php
 			// change the value of $dbuser and $dbpass to your username and password
@@ -42,27 +44,38 @@ else {
 			}
 
 			// query to select all information from applicants table
-			$query = "SELECT AN.Name, AN.Email, AN.Skills
-			FROM Applicants AN, Applications AT
+			$query = "SELECT AN.Name, AN.Email, AN.Skills, AT.ResumeCV, AT.CoverLetter, R.Name, R.Email, R.PhoneNumber
+			FROM Applicants AN, Applications AT, Reference R
 			WHERE AN.ApplicantID=AT.ApplicantID
-			AND AT.PositionID=110;";
+			AND AT.ApplicationID=R.ApplicationID
+			AND AT.PositionID=?;";
 
 			// Get results from query
-			$result = mysqli_query($conn, $query);
+			$stmt = mysqli_prepare($conn, $query);
+			$stmt->bind_param('i', $positionID);
+			$stmt->execute();
+			$result = $stmt->get_result();
 			if (!$result) {
 				die("Query to show fields from table failed");
 			}
 			// get number of columns in table
 			$fields_num = mysqli_num_fields($result);
-			echo "<h1>Users:</h1>";
-			echo "<table id='t01' border='1'><tr>";
+			echo "<left class='sectionheader'><h1>View Applicants for Position #" . $positionID . "</h1></left><br>";
+			echo "<div class='ui divider'></div><br>";
+			echo "<div style='display: inline-block'>";
+			echo "<table class='ui padded celled table' style='max-width: 100%; max-height: 50vw; display: block; overflow-y:auto'>";
+			echo "<thead><tr>";
 
 			// printing table headers
-			for($i=0; $i<$fields_num; $i++) {
-				$field = mysqli_fetch_field($result);
-				echo "<td><b>$field->name</b></td>";
-			}
-			echo "</tr>\n";
+			echo "<th>Name</th>";
+			echo "<th>Email</th>";
+			echo "<th>Skills</th>";
+			echo "<th>Resume/CV</th>";
+			echo "<th>Cover Letter</th>";
+			echo "<th>Reference Name</th>";
+			echo "<th>Reference Email</th>";
+			echo "<th>Reference Phone Number</th>";
+			echo "</tr>\n<tbody>";
 			while($row = mysqli_fetch_row($result)) {
 				echo "<tr>";
 				// $row is array... foreach( .. ) puts every element
@@ -71,18 +84,16 @@ else {
 				echo "<td>$cell</td>";
 				echo "</tr>\n";
 			}
+			echo "</tbody></table></div>";
 
 			mysqli_free_result($result);
 			mysqli_close($conn);
 			?>
-		</body>
+		</div>
+	</body>
 
-	</head>
-	<body>
-
-		</html>
+	</html>
 
 		<?php
-	}
 }
 ?>

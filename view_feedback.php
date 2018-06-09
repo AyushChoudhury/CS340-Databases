@@ -35,7 +35,7 @@ else {
 
   <html>
   <head>
-    <title>View Feedback - FindMeAJob</title>
+    <title>View User Feedback - FindMeAJob</title>
     <link type="text/css" rel="stylesheet" href="./css/Semantic-UI-CSS-master/semantic.css"/>
     <link type="text/css" rel="stylesheet" href="./css/stylesheet.css"/>
     <script type="text/javascript" src="./css/Semantic-UI-CSS-master/semantic.js"></script>
@@ -51,7 +51,7 @@ else {
     <div class="siteheader" id="siteheader"></div>
 
     <div class="mainbody">
-      <left class="sectionheader"><h1>View Feedback</h1></left>
+      <left class="sectionheader"><h1>View User Feedback</h1></left>
       <div class="ui divider"></div><br>
 
       <div style="display: inline-block">

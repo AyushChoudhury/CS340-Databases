@@ -56,9 +56,10 @@ else {
       <div class="ui divider"></div><br>
 
       <div style="display: inline-block">
-        <table class="ui padded celled table" style="max-width: 100%; max-height: 50vw; display: block; overflow-y:auto">
+        <table class="ui padded celled table" style="display: inline-block; overflow-y:auto">
           <thead>
             <tr>
+              <th>Position ID</th>
               <th>Job Title / Employee Type</th>
               <th>Start Date</th>
               <th>Location</th>
@@ -68,10 +69,11 @@ else {
           <tbody>
             <?php foreach ($positions as $pos): ?>
               <tr>
+                <td><?php echo $pos['PositionID']; ?></td>
                 <td><?php echo $pos['EmployeeType']; ?></td>
                 <td><?php echo date('M d, Y', strtotime($pos['StartDate'])); ?></td>
                 <td><?php echo $pos['Location']; ?></td>
-                <td><a href="./view_applicants.php?id=<?php echo $pos['PositionID']; ?>" class="ui blue button"></a></td>
+                <td><a href="./view_applicants.php?id=<?php echo $pos['PositionID']; ?>" class="ui blue button">View Applicants</a></td>
               </tr>
             <?php endforeach; ?>
           </tbody>
