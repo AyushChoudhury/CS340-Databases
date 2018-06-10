@@ -56,7 +56,7 @@ else {
       <div class="ui divider"></div><br>
 
       <div style="display: inline-block">
-        <h2>Recently Created Positions</h2>
+        <h2>Upcoming Positions</h2>
         <table class="ui padded celled table" style="max-width: 100%; max-height: 50vw; display: block; overflow-y:auto">
           <thead>
             <tr>

@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: classmysql.engr.oregonstate.edu:3306
--- Generation Time: May 13, 2018 at 10:35 PM
+-- Generation Time: Jun 09, 2018 at 03:18 PM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.0.30
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cs340_habibelo`
+-- Database: `cs340_choudhay`
 --
 
 -- --------------------------------------------------------
@@ -40,10 +40,8 @@ CREATE TABLE `Reference` (
 --
 
 INSERT INTO `Reference` (`ApplicationID`, `Name`, `Email`, `PhoneNumber`) VALUES
-(14, 'Bruce Wayne', 'batman@email.com', '666-666-6666'),
 (20, 'Elon Musk', 'musk@email.com', '777-777-7777'),
-(13, 'Mahatma Gandhi', 'gandhi@email.com', '888-888-8888'),
-(15, 'Nelson Mandela', 'mandela@email.com', '999-999-9999'),
+(23, 'Sephiroth', 'One_winged_angel@gmail.com', ''),
 (12, 'Snoop Dogg', 'dogg@email.com', '555-555-5555');
 
 --
@@ -54,7 +52,8 @@ INSERT INTO `Reference` (`ApplicationID`, `Name`, `Email`, `PhoneNumber`) VALUES
 -- Indexes for table `Reference`
 --
 ALTER TABLE `Reference`
-  ADD PRIMARY KEY (`Name`);
+  ADD PRIMARY KEY (`Name`),
+  ADD KEY `Reference_ibfk_1` (`ApplicationID`);
 
 --
 -- Constraints for dumped tables
@@ -64,7 +63,7 @@ ALTER TABLE `Reference`
 -- Constraints for table `Reference`
 --
 ALTER TABLE `Reference`
-  ADD CONSTRAINT `Reference_ibfk_1` FOREIGN KEY (`ApplicationID`) REFERENCES `Applications` (`ApplicationID`);
+  ADD CONSTRAINT `Reference_ibfk_1` FOREIGN KEY (`ApplicationID`) REFERENCES `Applications` (`ApplicationID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

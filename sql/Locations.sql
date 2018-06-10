@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: classmysql.engr.oregonstate.edu:3306
--- Generation Time: May 13, 2018 at 10:34 PM
+-- Generation Time: Jun 09, 2018 at 03:18 PM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.0.30
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cs340_habibelo`
+-- Database: `cs340_choudhay`
 --
 
 -- --------------------------------------------------------
@@ -37,17 +37,6 @@ CREATE TABLE `Locations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Locations`
---
-
-INSERT INTO `Locations` (`CompanyID`, `Street`, `City`, `State`, `ZIP`) VALUES
-(23, '101 SW Hwy 101', 'Lincoln City', 'OR', '97367'),
-(11, '123 4th Street', 'Corvallis', 'OR', '97333'),
-(2, '12345 SW 1st Ave', 'Portland', 'OR', '97229'),
-(4, '145 1st St.', 'Corvallis', 'OR', '97333'),
-(1, '567 2nd St.', 'Corvallis', 'Oregon', '97333');
-
---
 -- Indexes for dumped tables
 --
 
@@ -55,7 +44,8 @@ INSERT INTO `Locations` (`CompanyID`, `Street`, `City`, `State`, `ZIP`) VALUES
 -- Indexes for table `Locations`
 --
 ALTER TABLE `Locations`
-  ADD PRIMARY KEY (`Street`);
+  ADD PRIMARY KEY (`Street`),
+  ADD KEY `Locations_ibfk_1` (`CompanyID`);
 
 --
 -- Constraints for dumped tables
@@ -65,7 +55,7 @@ ALTER TABLE `Locations`
 -- Constraints for table `Locations`
 --
 ALTER TABLE `Locations`
-  ADD CONSTRAINT `Locations_ibfk_1` FOREIGN KEY (`CompanyID`) REFERENCES `Companies` (`CompanyID`);
+  ADD CONSTRAINT `Locations_ibfk_1` FOREIGN KEY (`CompanyID`) REFERENCES `Companies` (`CompanyID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
